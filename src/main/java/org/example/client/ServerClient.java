@@ -1,6 +1,6 @@
 package org.example.client;
 
-import org.example.Post;
+import org.example.PostDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -10,5 +10,5 @@ import java.util.List;
 public interface ServerClient {
 
   @GetMapping(value = "/posts/")
-  List<Post> getPosts();
+  List<PostDto> getPosts();
 }

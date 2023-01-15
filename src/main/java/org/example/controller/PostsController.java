@@ -1,7 +1,7 @@
 package org.example.controller;
 
+import org.example.PostDto;
 import org.example.client.ServerClient;
-import org.example.Post;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +19,7 @@ public class PostsController {
   }
 
   @GetMapping(path = "/")
-  List<Post> getPosts() {
+  List<PostDto> getPosts() {
     return serverClient.getPosts();
   }
 }
