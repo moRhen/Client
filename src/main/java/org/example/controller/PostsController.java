@@ -1,10 +1,9 @@
 package org.example.controller;
 
+import org.example.CommentDto;
 import org.example.PostDto;
 import org.example.client.ServerClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,8 +17,29 @@ public class PostsController {
     this.serverClient = serverClient;
   }
 
-  @GetMapping(path = "/")
+
+  @PostMapping()
+  void createPost(@RequestBody PostDto postDto) {
+    serverClient.createPost(postDto);
+  }
+
+  @PostMapping(path = "{postId}/addComment")
+  void addCommentForPost(@RequestBody CommentDto commentDto, @PathVariable long postId) {
+    serverClient.createCommentForPost(commentDto, postId);
+  }
+
+  @GetMapping()
   List<PostDto> getPosts() {
     return serverClient.getPosts();
+  }
+
+  @GetMapping(path = "/{postId}")
+  PostDto getPostById(@PathVariable long postId) {
+    return serverClient.getPostById(postId);
+  }
+
+  @DeleteMapping(path = "/{postId}")
+  void deletePostById(@PathVariable long postId) {
+    serverClient.deletePostById(postId);
   }
 }
